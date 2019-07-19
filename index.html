@@ -7,8 +7,20 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="referrer" content="no-referrer" />
-    <title>每日签到</title>
-    <link rel="stylesheet" href="./style.css" />
+    <meta name="theme-color" content="#FFE1C4" />
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700" />
+    <title>每日签到 - 快来签到吧</title>
+    <link rel="apple-touch-icon" href="/icons/96.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(reg => console.log("service worker registered", reg))
+          .catch(err => console.log("service worker not registered", err));
+      }
+    </script>
   </head>
 
   <body>
@@ -105,8 +117,7 @@
       }
 
       function fetchData() {
-        // fetch("https://api.oonnnoo.com/start/app.json")
-        fetch("./app.json")
+        fetch("https://api.oonnnoo.com/qiandao/app.json")
           .then(res => {
             return res.json();
           })
