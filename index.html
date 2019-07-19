@@ -17,8 +17,8 @@
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register("/sw.js")
-          .then(reg => console.log("service worker registered", reg))
-          .catch(err => console.log("service worker not registered", err));
+          .then(reg => console.log("service worker registered"))
+          .catch(err => console.log("service worker not registered"));
       }
     </script>
   </head>
@@ -30,6 +30,13 @@
           <a class="link" href="/">
             <span class="link-text">
               首页
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="/about.html">
+            <span class="link-text">
+              关于
             </span>
           </a>
         </li>
@@ -64,6 +71,7 @@
       </ul>
     </header>
     <div class="container">
+      <h2>每日签到</h2>
       <h3>未签到</h3>
       <ul class="link-list link-icon-list" id="unsign-list"></ul>
       <h3>已签到</h3>
@@ -101,8 +109,6 @@
       } else {
         fetchData();
       }
-      console.log(localStorage.appList);
-      console.log(isSameDay(localStorage.getItem("lastFetch")));
 
       function isSameDay(time = 0) {
         var date = new Date();

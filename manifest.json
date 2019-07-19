@@ -2,10 +2,11 @@
   "name": "每日签到 - 快来签到吧",
   "short_name": "每日签到",
   "description": "每日签到获取积分、等级奖励",
-  "start_url": "https://qian.lidong.me",
+  "start_url": "https://qian.lidong.me/?source=pwa",
   "display": "standalone",
   "orientation": "portrait-primary",
   "lang": "Chinese",
+  "scope": "/",
   "icons": [
     {
       "src": "/icons/32.png",

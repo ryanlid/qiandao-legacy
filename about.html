@@ -1,0 +1,80 @@
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#FFE1C4" />
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700" />
+    <title>About - 每日签到</title>
+    <link rel="apple-touch-icon" href="/icons/96.png" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(reg => console.log("service worker registered"))
+          .catch(err => console.log("service worker not registered", err));
+      }
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <ul class="link-list">
+        <li>
+          <a class="link" href="/">
+            <span class="link-text">
+              首页
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="/about.html">
+            <span class="link-text">
+              关于
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://start.lidong.me/">
+            <span class="link-text">
+              起始页
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://start.lidong.me/lan.html">
+            <span class="link-text">
+              内部链接
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://start.lidong.me/design.html">
+            <span class="link-text">
+              设计
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://lidong.me/">
+            <span class="link-text">
+              Lidong
+            </span>
+          </a>
+        </li>
+      </ul>
+    </header>
+    <div class="container">
+      <h2>About</h2>
+      <div>
+        谢谢使用👏
+      </div>
+    </div>
+  </body>
+</html>
