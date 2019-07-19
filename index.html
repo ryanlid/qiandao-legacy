@@ -1,0 +1,153 @@
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="referrer" content="no-referrer" />
+    <title>每日签到</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <header>
+      <ul class="link-list">
+        <li>
+          <a class="link" href="/">
+            <span class="link-text">
+              首页
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://start.lidong.me/">
+            <span class="link-text">
+              起始页
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://start.lidong.me/lan.html">
+            <span class="link-text">
+              内部链接
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://start.lidong.me/design.html">
+            <span class="link-text">
+              设计
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://lidong.me/">
+            <span class="link-text">
+              Lidong
+            </span>
+          </a>
+        </li>
+      </ul>
+    </header>
+    <div class="container">
+      <h3>未签到</h3>
+      <ul class="link-list link-icon-list" id="unsign-list"></ul>
+      <h3>已签到</h3>
+      <ul class="link-list link-icon-list" id="signed-list"></ul>
+    </div>
+    <script src="https://static.oonnnoo.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      var appList = [];
+      function showList(arr, target) {
+        var html = "";
+        for (let i = 0; i < arr.length; i++) {
+          html += `<li>
+          <a
+            class="link"
+            href="${arr[i].url}"
+
+            data-id="${arr[i].id}"
+          >
+            <img class="icon" src="${arr[i].icon}" alt="" />
+            <span class="link-text">
+              ${arr[i].name}
+            </span>
+          </a>
+        </li>`;
+        }
+        target.innerHTML = html;
+      }
+
+      if (
+        localStorage.appList &&
+        isSameDay(localStorage.getItem("lastFetch"))
+      ) {
+        appList = JSON.parse(localStorage.appList);
+        init();
+      } else {
+        fetchData();
+      }
+      console.log(localStorage.appList);
+      console.log(isSameDay(localStorage.getItem("lastFetch")));
+
+      function isSameDay(time = 0) {
+        var date = new Date();
+        if (
+          date.getDate() - Date.parse(time) > 1 ||
+          date.getTime() - time > 86400000
+        ) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      function fetchData() {
+        // fetch("https://api.oonnnoo.com/start/app.json")
+        fetch("./app.json")
+          .then(res => {
+            return res.json();
+          })
+          .then(data => {
+            appList = data.data;
+            localStorage.setItem("appList", JSON.stringify(appList));
+            localStorage.setItem("lastFetch", Date.parse(new Date()));
+            init();
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+
+      function init() {
+        showList(
+          appList.filter(e => {
+            return !e.status;
+          }),
+          document.querySelector("#unsign-list")
+        );
+        // 已签到列表
+        showList(
+          appList.filter(e => {
+            return e.status;
+          }),
+          document.querySelector("#signed-list")
+        );
+        localStorage.setItem("appList", JSON.stringify(appList));
+      }
+
+      $("#unsign-list").on("click", "li", e => {
+        var id = $(e.target)
+          .parentsUntil("li")
+          .attr("data-id");
+        var index = appList.findIndex(e => {
+          return e.id == id;
+        });
+        appList[index].status = true;
+        init();
+      });
+    </script>
+  </body>
+</html>

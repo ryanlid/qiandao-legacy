@@ -1,0 +1,48 @@
+body {
+  font-size: 15px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  padding: 20px;
+}
+.link-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex: auto;
+  margin: 0;
+  padding: 0;
+}
+.link-list li {
+  line-height: 1.5;
+  padding: 10px;
+}
+.link-icon-list {
+  justify-content: space-between;
+}
+.link {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+}
+.link .icon {
+  width: 64px;
+  height: 64px;
+  vertical-align: middle;
+}
+.link-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+.link-list a {
+  color: #3269a0;
+  text-decoration: none;
+}
+.link-list a:hover {
+  text-decoration: underline;
+}
