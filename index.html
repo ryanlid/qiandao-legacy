@@ -77,8 +77,20 @@
       <h3>已签到</h3>
       <ul class="link-list link-icon-list" id="signed-list"></ul>
     </div>
+    <div class="time-tips">数据更新: <span class="update-time"></span></div>
     <script src="https://static.oonnnoo.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
+      function showTime(time) {
+        var d;
+        var time = time || localStorage.getItem("lastFetch");
+        if (time) {
+          d = new Date(Number(time)).toLocaleString();
+        } else {
+          d = "等待更新";
+        }
+        $(".update-time").html(d);
+      }
+      showTime();
       var appList = [];
       function showList(arr, target) {
         var html = "";
@@ -131,6 +143,7 @@
             appList = data.data;
             localStorage.setItem("appList", JSON.stringify(appList));
             localStorage.setItem("lastFetch", Date.parse(new Date()));
+            showTime(Date.now());
             init();
           })
           .catch(err => {

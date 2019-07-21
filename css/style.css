@@ -49,3 +49,7 @@ body {
 .link-list a:hover {
   text-decoration: underline;
 }
+
+.time-tips{
+  color: gray;
+}
