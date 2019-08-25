@@ -23,6 +23,11 @@ body {
   line-height: 1.5;
   padding: 10px;
 }
+.link-list .extra-list{
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 .link-icon-list {
   justify-content: space-between;
 }
@@ -41,6 +46,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
+  font-size: 12px;
 }
 .link-list a {
   color: #3269a0;
