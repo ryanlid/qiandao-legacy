@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/project
+
+    steps:
+      - checkout
+      - run:
+          name: Update System
+          command: |
+            sudo apt-get update && sudo apt-get install rsync
+      - deploy:
+          name: Deploy via ssh
+          command: |
+            mkdir -p ~/.ssh
+            touch ~/.ssh/known_hosts
+            { ssh-keyscan $SSH_HOST 2> /dev/null; } >> ~/.ssh/known_hosts
+            pwd
+            ls
+            if [ ${CIRCLE_BRANCH} = "master" ];then
+                rsync -az -v --delete -e ssh /home/circleci/project/* $SSH_USER@$SSH_HOST:/var/www/qian/
+            else
+                echo "Not master branch"
+            fi
